@@ -15,13 +15,29 @@ const navList = document.getElementById('nav-list');
 
 const icon = document.getElementById('icon');
 
+const countryColor = document.querySelectorAll('.country-color');
+
+const country = document.querySelectorAll('.country');
+
 // funtion pour afficher le navbar lorsqu'on click sur le logo
 icon.addEventListener('click', (event) => {
   event.preventDefault();
-  navList.style.right = '0';
-  navList.style.display = 'flex';
+  navList.classList.add('active');
   navbarIcon.style.display ='none';
 });
+
+// Ajouter un événement au document pour fermer la navList
+document.addEventListener('click', (event) => {
+  const isClickInsideNav = navList.contains(event.target);
+  const isClickOnIcon = icon.contains(event.target);
+
+  // si le clic est à l'exterieur de naList et icon
+  if (!isClickInsideNav && !isClickOnIcon) {
+    navList.classList.remove('active');
+    navbarIcon.style.display = 'block';
+  }
+});
+
 
 
 // Fonction pour empêcher le défilement horizontal
@@ -37,6 +53,11 @@ function allowHorizontalScroll() {
 }
 
 
+// fonction pour raflechi la page lorsqu'on click sur le logo
+function logoContainer() {
+  window.location.href ='index.html';
+} 
+
 
 
 
@@ -45,8 +66,29 @@ function allowHorizontalScroll() {
 dropdown.addEventListener('click', (e) => {
   e.preventDefault();
   dropdown.classList.toggle('open');
-  dropdownTrigger.style.textDecoration = 'none';
-  dropdownMenu.style.right = '0'
+});
+
+document.addEventListener('click', (e) => {
+  const isClickInsideDropdown = dropdown.contains(e.target);
+
+  if (!isClickInsideDropdown) {
+    dropdown.classList.remove('open');
+  }
+});
+
+// animation lorsque le souris passe sur la liste des pays
+country.forEach(countryElement => {
+  countryElement.addEventListener('mouseover', () => {
+    countryColor.forEach(countryColor => {
+      countryColor.classList.add('active-color');
+    });
+  });
+
+  countryElement.addEventListener('mouseout', () => {
+    countryColor.forEach(countryColor => {
+      countryColor.classList.remove('active-color');
+    });
+  });
 });
 
 // donner de la couleur au header en cas de scroll
@@ -66,7 +108,7 @@ window.addEventListener('scroll', () => {
   if (window.scrollY > 0 && !dropdown.classList.contains('open') && !isInstallationVisible) {
     header.style.position = 'sticky';
     header.style.top = '0';
-    header.style.backgroundColor = '#d3e8fc';
+    header.style.backgroundColor = '#041e2c7f';
     header.style.boxShadow = '0px 4px 6px rgba(0, 0, 0, 0.1)';
     allowHorizontalScroll();
   } else {
@@ -226,7 +268,7 @@ showTestimonial(currentIndex);
 // rédirestion lorsque le client clique sur le boutton prenium
 
 const countryRedirects = {
-  CI: "Sff-côte-ivoire.html",
+  CI: "index3.html",
   // CM: "Sff-cameroun.html",
   // SN: "Sff-sénégal.html",
   // BF: "Sff-burkina-faso.html",
@@ -284,6 +326,9 @@ const freeBtn2 = document.getElementById('freeBtn2');
 let dataId;
 let isVpnIdConfirmed = false; // Pour le formulaire gratuit
 
+// Variables dynamiques pour stocker les données des boutons payants
+let currentFile, currentOption, currentPrice;
+
 // Gestion des tickets
 let ticketCount = parseInt(localStorage.getItem('ticketCount')) || 1;
 let lastResetDate = localStorage.getItem('lastResetDate') || getFormattedDate(new Date());
@@ -319,16 +364,40 @@ updateButton.addEventListener('click', () => {
 
 // Ouverture et fermeture du modal
 freeBtn.addEventListener('click', () => {
+  setModalData(freeBtn); // Utilise les données du bouton gratuit
   modal.classList.add('active');
 });
 
 freeBtn2.addEventListener('click', () => {
+  setModalData(freeBtn2); // Utilise les données du bouton gratuit
   modal.classList.add('active');
 });
 
 closeModal.addEventListener('click', () => {
   modal.classList.remove('active');
+  texteArea.value = '';
+  confirmIcon.style.display = 'none';
+  updateButton.style.backgroundColor = '#ffc107';
+  isVpnIdConfirmed = false; // Réinitialise la confirmation
 });
+
+// Boutons 'buy-btn'
+const buyBtns = document.querySelectorAll('.buy-btn');
+
+// Ajouter un gestionnaire d'événements pour chaque bouton 'buy-btn'
+buyBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    setModalData(btn); // Utilise les données du bouton cliqué
+    modal.classList.add('active');
+  });
+});
+
+// Fonction pour copier les attributs d'un bouton dans les variables dynamiques
+function setModalData(button) {
+  currentFile = button.getAttribute('data-file');
+  currentOption = button.getAttribute('data-option');
+  currentPrice = button.getAttribute('data-price');
+}
 
 // Bouton WhatsApp
 whatsappBtn.addEventListener('click', () => {
@@ -337,7 +406,7 @@ whatsappBtn.addEventListener('click', () => {
     return;
   }
   if (validateVpnId(texteArea)) {
-    sendMessage('WhatsAppWeb', freeBtn.getAttribute('data-file'), freeBtn.getAttribute('data-option'), freeBtn.getAttribute('data-price'), dataId, ticketCount++);
+    sendMessage('WhatsAppWeb', currentFile, currentOption, currentPrice, dataId, ticketCount++);
   }
 });
 
@@ -348,7 +417,7 @@ telegramBtn.addEventListener('click', () => {
     return;
   }
   if (validateVpnId(texteArea)) {
-    sendMessage('TelegramWeb', freeBtn.getAttribute('data-file'), freeBtn.getAttribute('data-option'), freeBtn.getAttribute('data-price'), dataId, ticketCount++);
+    sendMessage('TelegramWeb', currentFile, currentOption, currentPrice, dataId, ticketCount++);
   }
 });
 
@@ -437,3 +506,57 @@ function goToContactPage() {
 function telegramGroup() {
   window.open('https://t.me/TechnologieGaig', '_blank');
 }
+
+
+
+
+// Créer la scène
+const scene = new THREE.Scene();
+
+// Ajouter une caméra
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 3;
+
+// Ajouter un rendu avec fond transparent
+const renderer = new THREE.WebGLRenderer({ alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x000000, 0); // 0x000000 = noir, 0 = transparence
+document.getElementById('globet').appendChild(renderer.domElement);
+
+// Créer une sphère pour le globe
+const geometry = new THREE.SphereGeometry(.8, 32, 32);
+const texture = new THREE.TextureLoader().load('https://res.cloudinary.com/ddqfmqin7/image/upload/v1734443681/worldwide-connection-blue-background-illustration_53876-63933.jpg_uymm6x.jpg');
+const material = new THREE.MeshStandardMaterial({ map: texture });
+const globe = new THREE.Mesh(geometry, material);
+scene.add(globe);
+
+// Ajouter une lumière directionnelle (simulant le soleil)
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+directionalLight.position.set(5, 5, 5).normalize();
+scene.add(directionalLight);
+
+// Ajouter une lumière ambiante pour éclairer uniformément
+const ambientLight = new THREE.AmbientLight(0x404040, 1); // Lumière ambiante
+scene.add(ambientLight);
+
+// Ajouter une lumière hémisphérique (pour une lumière plus uniforme)
+const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
+scene.add(hemisphereLight);
+
+// Mettre à jour l'aspect de la caméra et la taille du renderer lorsque la fenêtre est redimensionnée
+window.addEventListener('resize', () => {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  renderer.setSize(width, height);
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+});
+
+// Fonction d'animation
+function animate() {
+  requestAnimationFrame(animate);
+  globe.rotation.y += 0.002; // Rotation de gauche à droite
+  renderer.render(scene, camera);
+}
+
+animate();
