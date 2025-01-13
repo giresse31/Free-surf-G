@@ -287,7 +287,7 @@ button:hover {
 }
 
 .modal {
-  background-color: #343a3cee;
+  background-color: #343a3c;
   max-width: 400px;
   margin: auto;
   margin-top: 150px;
@@ -493,8 +493,7 @@ button:hover {
 .npv-section .container-cont {
   width: 100%;
   position: relative;
-  padding: 5px 0 30px;
-  margin-bottom: 50px;
+  padding: 5px 0;
 }
 
 .container-cont h3 {
@@ -533,9 +532,9 @@ button:hover {
 } */
 
 .npv-section .container {
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -553,13 +552,19 @@ button:hover {
   font-size: 1.2rem;
   color: #fff;
   margin-bottom: 40px;
+  padding: 15px;
 }
 
 .npv-section .container {
-  display: flex;
-  justify-content: left;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
-  flex-wrap: wrap;
+  justify-content: start;
+  max-width: 1200px;
+  margin: 50px auto;
+  margin-bottom: 0;
+  padding: 0 20px;
+  grid-auto-flow: dense;
 }
 
 .npv-content {
@@ -568,14 +573,12 @@ button:hover {
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0 4px 6px rgba(245, 243, 243, 0.1);
-  max-width: 300px;
-  min-width: 250px;
   line-height: 1.1;
 }
 
 .npv-content h3 {
   font-size: 1.5rem;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   color: #fff;
 }
 
@@ -713,7 +716,6 @@ span {
 
 /* mission */
 .mission-section {
-  margin-top: 60px;
   background-color: #041e2c;
   padding: 40px 0;
   text-align: center;
@@ -730,16 +732,16 @@ span {
   color: #fff;
   max-width: 800px;
   margin: 0 auto 30px;
-  padding: 0 10px;
+  padding: 0 20px;
 }
 
 .mission-images {
   display: flex;
   overflow-x: scroll;
-  gap: 30px;
+  margin: auto;
   margin-top: 30px;
   align-items: center;
-  padding: 0 100px;
+  max-width: 1200px;
 }
 
 .mission-images::-webkit-scrollbar {
@@ -747,7 +749,7 @@ span {
 }
 
 .img-content {
-  width: 60%;
+  width: 300px;
   background: linear-gradient(135deg, #343a3c, #0099cc);
   margin: auto;
   border-radius: 10px;
@@ -927,7 +929,7 @@ span {
 
 .fat-question {
   width: 100%;
-  background-color: cadetblue;
+  background-color: #007bff;
   color: #fff;
   font-size: 1.2rem;
   font-weight: bold;
@@ -1017,7 +1019,7 @@ span {
 }
 
 .stider-controls button {
-  background-color: cadetblue;
+  background-color: #007bff;
   color: #fff;
   border: none;
   padding: 10px 15px;
@@ -1084,7 +1086,7 @@ span {
   gap: 20px;
   text-decoration: none;
   color: #fff;
-  background-color: cadetblue;
+  background-color: #007bff;
   border-radius: 10px;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
@@ -1141,8 +1143,8 @@ footer {
   }
 
   .mission-images {
-    gap: 20px;
-    padding: 0 15px;
+    gap: 15px;
+    padding: 0 20px;
   }
 
   .header-section {
@@ -1155,7 +1157,7 @@ footer {
     padding: 1rem;
     color: #fff;
     border-radius: 10px;
-    margin: 0 10px;
+    margin: 0 15px;
     width: 95%;
     margin: auto;
     box-sizing: border-box;
@@ -1176,22 +1178,30 @@ footer {
     margin: 0 auto;
     overflow-x: scroll;
     scroll-behavior: smooth;
-    padding: 0 10px;
     box-sizing: border-box;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    margin: 50px auto;
+    margin-bottom: 0;
+    display: flex;
+    flex-wrap: nowrap;
   }
   
   .npv-section .container::-webkit-scrollbar {
-    display: none;
+    height: 8px;
   }
 
-  .npv-section .container {
-    display: flex;
-    justify-content: left;
-    gap: 20px;
-    flex-wrap: nowrap;
+  .npv-section .container::-webkit-scrollbar-thumb {
+    background-color: #004062;
+    border-radius: 4px;
   }
+
+  .npv-section .container::-webkit-scrollbar-track {
+    background: #f3f3f3;
+  }
+
+  .npv-content {
+    max-width: 250px;
+    min-width: 250px;
+  } 
 
 }
 
@@ -1262,22 +1272,28 @@ footer {
     font-size: 1rem;
   }
 
+  .hero-section {
+    height: 65vh;
+  }
+
   /* .cta-button {
     font-size: 0.9rem;
     padding: 10px 20px;
   } */
 
   .mission-images {
-    gap: 20px;
-    padding: 0 10px;
+    gap: 15px;
+    padding: 0 15px;
   }
 
   .img-content {
     width: 260px;
+    padding: 0 15px;
   }
+  
 
   .img-content img {
-    width: 230px;
+    width: 200px;
   }
 
   .conctact-container {
@@ -1302,8 +1318,16 @@ footer {
     font-size: 2rem;
   }
 
+  .adv-section {
+    padding: 40px 15px;
+  }
+
   .hero-content h1 {
     font-size: 2.5rem;
+  }
+
+  .cta-section {
+    width: 100%;
   }
 
   .modal {
@@ -1314,6 +1338,17 @@ footer {
     max-width: 100%;
   }
 
+  .npv-section .container {
+    padding: 0 15px;
+    gap: 15px;
+    margin: 30px auto;
+    margin-bottom: 0;
+  }
+
+  .npv-content {
+    max-width: 200px;
+    min-width: 230px;
+  }
 }
 
 @media (max-width: 310px) {
