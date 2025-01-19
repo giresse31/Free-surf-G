@@ -235,37 +235,6 @@ prevBtn.addEventListener('click', () => {
 showTestimonial(currentIndex);
 
 
-// // changer le background-image de l'hero section
-// const heroSection = document.getElementById('hero-section');
-
-// // List des url des images de fond
-// const backgroundImages = [
-//   'https://res.cloudinary.com/ddqfmqin7/image/upload/v1734443794/cyber-security-technology-online-data-protection_31965-14169.jpg_gvsktn.jpg',
-
-//   // 'https://res.cloudinary.com/ddqfmqin7/image/upload/v1734482463/agjstf383ifjcfqinbaa.jpg',
-
-//   // 'https://res.cloudinary.com/ddqfmqin7/image/upload/v1734483584/images_ubuo56.jpg',
-
-//   // 'https://res.cloudinary.com/ddqfmqin7/image/upload/v1734486591/images_enfbbh.jpg'
-// ];
-
-// let currentImageIndex = 0;
-
-// // Fontion pour changer l'image
-// function changeHeroImage() {
-//   heroSection.style.opacity = 1;
-//   setTimeout(() => {
-//     currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
-//     heroSection.style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
-//     heroSection.style.opacity = '1';
-//   }, 1000);
-// }
-
-// // Lance de changement toutes les 5s
-// setInterval(changeHeroImage, 10000);
-
-
-// rédirestion lorsque le client clique sur le boutton prenium
 
 const countryRedirects = {
   CI: "index3.html",
@@ -286,34 +255,67 @@ const countryRedirects = {
   // ZA: "Sff-afrique-sud.html",
 }
 
-//Bouton pour afficher l'offre prenium 
-const preniumBtn = document.getElementById('preniumBtn');
+// Boutons pour afficher l'offre premium
+const preniumBtns = document.querySelectorAll('.btnj');
 
-preniumBtn.addEventListener('click', async () => {
-  try {
-    const response = await fetch("https://ipapi.co/json/");
-    const data = await response.json();
+// Fonction pour activer le spinner lié au bouton cliqué
+const openSpinner = (button) => {
+  const spinner = button.querySelector('.spinner');
+  const premiumSpan1 = button.querySelector('#premium-span1');
+  const premiumSpan2 = button.querySelector('#premium-span2');
 
-    if (data && data.country_code)  {
-      const userCountryCode = data.country_code.toUpperCase();
+  if (spinner) spinner.style.display = 'inline-block'; // Afficher le spinner
+  if (premiumSpan1) premiumSpan1.style.opacity = '0.5';
+  if (premiumSpan2) premiumSpan2.style.opacity = '0.5';
+  
+  // Ajouter une classe active au bouton cliqué
+  button.classList.add('active');
+};
 
-      if (countryRedirects[userCountryCode]) {
-        window.location.href = countryRedirects[userCountryCode];
+// Fonction pour désactiver le spinner
+const closeSpinner = (button) => {
+  const spinner = button.querySelector('.spinner');
+  const premiumSpan1 = button.querySelector('#premium-span1');
+  const premiumSpan2 = button.querySelector('#premium-span2');
+
+  if (spinner) spinner.style.display = 'none'; // Cacher le spinner
+  if (premiumSpan1) premiumSpan1.style.opacity = '1';
+  if (premiumSpan2) premiumSpan2.style.opacity = '1';
+  
+  // Retirer la classe active du bouton cliqué
+  button.classList.remove('active');
+};
+
+// Gestionnaire d'événement pour chaque bouton
+preniumBtns.forEach((btn) => {
+  btn.addEventListener('click', async () => {
+    openSpinner(btn); // Afficher le spinner pour ce bouton
+    try {
+      const response = await fetch("https://ipapi.co/json/");
+      const data = await response.json();
+
+      if (data && data.country_code) {
+        const userCountryCode = data.country_code.toUpperCase();
+
+        if (countryRedirects[userCountryCode]) {
+          window.location.href = countryRedirects[userCountryCode];
+        } else {
+          alert("Désolé, les fichiers VPN pour votre pays ne sont pas disponibles pour l'instant. Vous pouvez vérifier la liste des pays dans la section pays.");
+        }
       } else {
-        alert("Désolé, les fichiers VPN pour votre pays ne sont pas disponibles pour l'instant. Vous pouvez vérifié la list des pays dans la section pays");
+        alert("Impossible de détecter votre pays. Veuillez réessayer.");
       }
-    } else {
-      alert("Impossible de détecter votre pays. Veuillez réessayer.");
+    } catch (error) {
+      console.error("Erreur lors de la détection de l'adresse IP :", error);
+      alert("Erreur lors de la détection de votre pays. Veuillez réessayer.");
+    } finally {
+      closeSpinner(btn); // Cacher le spinner une fois l'action terminée
     }
-  } catch (error) {
-    console.error("Erreur lors de la détection de l'adresse IP :", error);
-    alert("Erreur lors de la détection de votre pays. Veuillez réessayer.");
-  }
+  });
 });
 
 
 
-// Initialisation des variables pour le formulaire gratuit
 const texteArea = document.getElementById('vpnId-textarea');
 const updateButton = document.getElementById('updateButton');
 const confirmIcon = document.querySelector('.confirme-action');
@@ -322,7 +324,6 @@ const closeModal = document.getElementById('close-free-modal');
 const whatsappBtn = document.getElementById('whatsapp-btn');
 const telegramBtn = document.getElementById('telegram-btn');
 const freeBtn = document.getElementById('freeBtn');
-const freeBtn2 = document.getElementById('freeBtn2');
 let dataId;
 let isVpnIdConfirmed = false; // Pour le formulaire gratuit
 
@@ -359,6 +360,8 @@ updateButton.addEventListener('click', () => {
   updateButton.setAttribute('data-vpnId', textAreaValue);
   confirmIcon.style.display = 'inline-block';
   updateButton.style.backgroundColor = '#02e002';
+  span1.style.display = 'none';
+  span2.style.display = 'inline-block';
   isVpnIdConfirmed = true; // Marque l'ID comme confirmé
 });
 
@@ -368,16 +371,13 @@ freeBtn.addEventListener('click', () => {
   modal.classList.add('active');
 });
 
-freeBtn2.addEventListener('click', () => {
-  setModalData(freeBtn2); // Utilise les données du bouton gratuit
-  modal.classList.add('active');
-});
-
 closeModal.addEventListener('click', () => {
   modal.classList.remove('active');
   texteArea.value = '';
   confirmIcon.style.display = 'none';
   updateButton.style.backgroundColor = '#ffc107';
+  span1.style.display = 'inline-block';
+  span2.style.display = 'none';
   isVpnIdConfirmed = false; // Réinitialise la confirmation
 });
 
@@ -476,6 +476,8 @@ ${salutation}, 𝙅𝙀 𝙑𝙀𝙐𝙓 𝙐𝙉 𝙁𝙄𝘾𝙃𝙄𝙀𝙍:
   texteArea.value = '';
   confirmIcon.style.display = 'none';
   updateButton.style.backgroundColor = '#ffc107';
+  span1.style.display = 'inline-block';
+  span2.style.display = 'none';
   isVpnIdConfirmed = false; // Réinitialise la confirmation
 }
 
@@ -500,7 +502,7 @@ function getFormattedDate(date) {
 
 // redirection vers la page de contact
 function goToContactPage() {
-  window.location.href = 'Sff-contact.html';
+  window.open('https://t.me/Surf_For_Free_services' ,'_blank');
 }
 
 function telegramGroup() {
@@ -508,9 +510,7 @@ function telegramGroup() {
 }
 
 
-
-
-// Créer la scène
+// // Créer la scène
 const scene = new THREE.Scene();
 
 // Ajouter une caméra

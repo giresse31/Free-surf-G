@@ -159,6 +159,7 @@ button:hover {
   display: flex;
   gap: 10px;
   align-items: center;
+  border-bottom: 1px solid #fff;
 }
 
 .dropdown-menu li:hover {
@@ -176,10 +177,6 @@ button:hover {
   content: '\25BC';
   margin-left: 8px;
   transition: transform 0.3s ease;
-}
-
-.dropdown-trigger:hover {
-  text-decoration: none;
 }
 
 .dropdown-container.open .dropdown-trigger:after {
@@ -254,6 +251,10 @@ button:hover {
   cursor: pointer;
 }
 
+.hero-buttons a.active {
+  background: #c69500;
+}
+
 .hero-buttons .btn-primary {
   background: #007bff;
 }
@@ -261,10 +262,34 @@ button:hover {
 
 .hero-buttons .btn-secondary {
   background: var(--secondary-color);
+  position: relative;
 }
 
 .hero-buttons .btn-secondary:hover {
   background: #c69500;
+}
+
+.spinner {
+  display: none;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  border-top: #000;
+  border-bottom: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .hero-buttons a:hover {
@@ -411,6 +436,10 @@ button:hover {
   transform: scale(1);
 }
 
+#span2 {
+  display: none;
+}
+
 .confirme-action, .confirme-action2 {
   color: #fff;
   display: none;
@@ -485,7 +514,6 @@ button:hover {
 
 /* vpn choise */
 .npv-section {
-  padding-bottom: 30px;
   background-color: #041e2c;
   text-align: center;
   line-height: 1.2;
@@ -499,7 +527,7 @@ button:hover {
 
 .container-cont h3 {
   font-size: 1.8rem;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   color: #fff;
 }
 
@@ -532,12 +560,6 @@ button:hover {
   color: var(--background-color);
 } */
 
-.npv-section .container {
-  width: 100%;
-  margin: 0 auto;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 .npv-section .container::-webkit-scrollbar {
   display: none;
@@ -563,7 +585,7 @@ button:hover {
   justify-content: start;
   max-width: 1200px;
   margin: 50px auto;
-  margin-bottom: 0;
+  margin-top: 0;
   padding: 0 20px;
   grid-auto-flow: dense;
 }
@@ -619,8 +641,21 @@ span {
   color: #02e002;
 }
 
-.npv-content ul li span,
+/* .npv-content ul li span, */
 .npv-content ul li a {
+  margin-left: 10px;
+  font-size: .9rem;
+  color: #f8f80f;
+  text-decoration: underline;
+  transition: text-decoration 0.2s ease, color 0.2s ease;
+}
+
+.npv-content ul li a:hover {
+  text-decoration: none;
+  color: #cfcf07;
+}
+
+.npv-content ul li span {
   margin-left: 10px;
   font-size: .9rem;
 }
@@ -663,7 +698,7 @@ span {
 
 .cta-button {
   padding: 0.8rem 1.5rem;
-  background-color: #ff9500;
+  background: var(--secondary-color);
   color: #fff;
   text-decoration: none;
   font-size: 1rem;
@@ -671,10 +706,12 @@ span {
   border-radius: 5px;
   transition: background 0.3s ease;
   cursor: pointer;
+  position: relative;
 }
 
-.cta-button:hover {
-  background-color: #ff7800;
+.cta-button:hover,
+.cta-button.active {
+  background: #c69500;
 }
 
 .cta-image img {
@@ -682,16 +719,6 @@ span {
   height: auto;
   border-radius: 10px;
   opacity: .7;
-}
-
-.rotating-globe {
-  display: inline-block;
-  width: 500px;
-  height: auto;
-  overflow: hidden;
-  border-radius: 50%; 
-  animation: spin 10s linear infinite;
-  opacity: 0.4;
 }
 
 /* Conteneur du canvas */
@@ -703,6 +730,7 @@ span {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  opacity: 0.4;
 }
 
 /* Canvas */
@@ -1170,18 +1198,11 @@ footer {
     max-width: 100%;
   }
 
-  .rotating-globe {
-    max-width: 70%;
-  }
-
   .npv-section .container {
     width: 100%;
-    margin: 0 auto;
     overflow-x: scroll;
     scroll-behavior: smooth;
     box-sizing: border-box;
-    margin: 50px auto;
-    margin-bottom: 0;
     display: flex;
     flex-wrap: nowrap;
   }
@@ -1209,7 +1230,7 @@ footer {
 @media (max-width: 525px) {
   
   .dropdown-menu {
-    top: 40px;
+    top: 50px;
   }
 
   .navbar-icon {
@@ -1232,7 +1253,8 @@ footer {
     width: 30%;
     position: absolute;
     background-color:#041e2c7f;
-    padding: 5px 0;
+    padding: 10px 0;
+    padding-left: 10px;
     font-size: 1rem;
     transition:  transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
   }
@@ -1245,6 +1267,7 @@ footer {
 
   .nav-list li {
     margin-right: 0;
+    border-bottom: 1px solid #fff;
   }
 }
 
@@ -1252,6 +1275,7 @@ footer {
   .country-color {
     display: none;
   }
+  
   .header-section {
     padding: 15px;
     padding-left: 8px;
@@ -1274,7 +1298,7 @@ footer {
   }
 
   .hero-section {
-    height: 65vh;
+    height: 70vh;
   }
 
   /* .cta-button {
@@ -1343,7 +1367,6 @@ footer {
     padding: 0 15px;
     gap: 15px;
     margin: 30px auto;
-    margin-bottom: 0;
   }
 
   .npv-content {

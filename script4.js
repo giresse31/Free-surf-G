@@ -1,91 +1,95 @@
-// sélectionner le parent "pays"
+// Sélectionner les éléments nécessaires
 const header = document.querySelector('.header-section');
-
 const dropdown = document.querySelector('.dropdown-container');
-
-const dropdownTrigger =  document.querySelector('.dropdown-trigger');
-
+const dropdownTrigger = document.querySelector('.dropdown-trigger');
 const dropdownMenu = document.querySelector('.dropdown-menu');
-
-const installationSection = document.querySelector('.installation-guide');
-
 const navbarIcon = document.getElementById('navbar-icon');
-
 const navList = document.getElementById('nav-list');
-
 const icon = document.getElementById('icon');
+const countryColor = document.querySelectorAll('.country-color');
+const country = document.querySelectorAll('.country');
 
-// funtion pour afficher le navbar lorsqu'on click sur le logo
-icon.addEventListener('click', (event) => {
-  event.preventDefault();
-  navList.style.right = '0';
-  navList.style.display = 'flex';
-  navbarIcon.style.display ='none';
-});
+// Fonction pour afficher le menu navbar lorsqu'on clique sur le logo
+if (icon && navList && navbarIcon) {
+  const toggleNavMenu = (event) => {
+    event.preventDefault();
+    navList.classList.toggle('active');
+    navbarIcon.style.display = navList.classList.contains('active') ? 'none' : 'block';
+  };
 
+  icon.addEventListener('click', toggleNavMenu);
 
-window.addEventListener('click', (event) => {
-  if (event.target() === dropdown) {
-    navList.style.right = '-100%';
-    navList.style.display = 'none';
-    navbarIcon.style.display ='block';
-  }
-});
+  // Fermer le menu navbar si clic en dehors
+  document.addEventListener('click', (event) => {
+    const isClickInsideNav = navList.contains(event.target);
+    const isClickOnIcon = icon.contains(event.target);
 
-
-
-// Fonction pour empêcher le défilement horizontal
-function preventHorizontalScroll() {
-  document.documentElement.style.overflowX = 'hidden';
-  document.body.style.overflowX = 'hidden';
+    if (!isClickInsideNav && !isClickOnIcon && navList.classList.contains('active')) {
+      toggleNavMenu(event);
+    }
+  });
 }
 
-// Fonction pour empêcher le défilement horizontal
-function allowHorizontalScroll() {
-  document.documentElement.style.overflowX = '';
-  document.body.style.overflowX = '';
+// Fonction pour rafraîchir la page lorsqu'on clique sur le logo
+function logoContainer() {
+  window.location.href = 'index4.html';
 }
 
+// Gestion du dropdown
+if (dropdown) {
+  const toggleDropdown = (e) => {
+    e.preventDefault();
+    dropdown.classList.toggle('open');
+  };
 
+  dropdown.addEventListener('click', toggleDropdown);
 
+  document.addEventListener('click', (e) => {
+    const isClickInsideDropdown = dropdown.contains(e.target);
 
-
-
-// Ajouter un écouter dévénement pour le click
-dropdown.addEventListener('click', (e) => {
-  e.preventDefault();
-  dropdown.classList.toggle('open');
-  dropdownTrigger.style.textDecoration = 'none';
-  dropdownMenu.style.right = '0'
-});
-
-// donner de la couleur au header en cas de scroll
-
-function allowHorizontalScroll() {
-  document.body.style.overflowX = 'auto';
+    if (!isClickInsideDropdown && dropdown.classList.contains('open')) {
+      toggleDropdown(e);
+    }
+  });
 }
 
-function preventHorizontalScroll() {
-  document.body.style.overflowX = 'hidden';
+// Animation lors du survol des pays
+if (country && countryColor) {
+  const toggleCountryColor = (isActive) => {
+    countryColor.forEach((colorElement) => {
+      colorElement.classList.toggle('active-color', isActive);
+    });
+  };
+
+  country.forEach((countryElement) => {
+    countryElement.addEventListener('mouseover', () => toggleCountryColor(true));
+    countryElement.addEventListener('mouseout', () => toggleCountryColor(false));
+  });
 }
 
-window.addEventListener('scroll', () => {
-  const sectionPosition = installationSection.getBoundingClientRect();
-  const isInstallationVisible = sectionPosition.top <= window.innerHeight && sectionPosition.bottom >= 0;
+// Changer le style du header lors du scroll
+if (header) {
+  const updateHeaderStyle = () => {
+    const isScrolled = window.scrollY > 0;
+    const isDropdownOpen = dropdown && dropdown.classList.contains('open');
 
-  if (window.scrollY > 0 && !dropdown.classList.contains('open') && !isInstallationVisible) {
-    header.style.position = 'sticky';
-    header.style.top = '0';
-    header.style.backgroundColor = '#f8f9fa';
-    header.style.boxShadow = '0px 4px 6px rgba(0, 0, 0, 0.1)';
-    allowHorizontalScroll();
-  } else {
-    header.style.position = 'relative';
-    header.style.backgroundColor = 'transparent';
-    header.style.boxShadow = 'none';
-    preventHorizontalScroll();
-  }
-});
+    if (isScrolled && !isDropdownOpen) {
+      header.style.position = 'fixed';
+      header.style.top = '0';
+      header.style.width = '100%';
+      header.style.backgroundColor = '#041e2c7f';
+      header.style.boxShadow = '0px 4px 6px rgba(0, 0, 0, 0.1)';
+    } else {
+      header.style.position = 'relative';
+      header.style.backgroundColor = 'transparent';
+      header.style.boxShadow = 'none';
+    }
+  };
+
+  window.addEventListener('scroll', () => {
+    requestAnimationFrame(updateHeaderStyle);
+  });
+}
 
 
 // rédirection des pays
@@ -152,3 +156,30 @@ function nigeria() {
 function sudAfric() {
   window.location.href = 'Sff-afrique-sud.html';
 }
+
+
+
+// fontion pour envoyé les message de formulaire vers telegrame
+document.getElementById('telegramForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  // récupérer les données du formulaire
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
+
+  // Construire le texte du message
+  const text =
+   `
+   - Nom : ${name}
+
+   - Email : ${email}
+
+   - Message : ${message}`;
+
+  // générer le lien Telegram
+  const telegramLink = `https://t.me/Surf_For_Free_services?text=${text}`;
+
+  // Rediriger l'utilisateur vers Telegram avec le message prérempli
+  window.open(telegramLink, '_blank');
+});

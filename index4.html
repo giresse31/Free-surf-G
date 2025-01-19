@@ -8,14 +8,16 @@
 </head>
 <body>
   <header class="header-section">
-    <div class="logo-container">
-      <img src="https://res.cloudinary.com/dmphpkfej/image/upload/v1735541654/5b6c1358da2ade80ea9e29510dfb4c01-26282172_fr3u13.jpg" alt="Logo">
+    
+    <div onclick="logoContainer()" class="logo-container">
       <p>Surf For Free</p>
+      <img src="https://res.cloudinary.com/dmphpkfej/image/upload/v1736341884/images_kwqyzj-removebg-preview_a4nrem.png" alt="Logo"> 
+     
     </div>
 
     <nav class="nav-container">
       <div id="navbar-icon" class="navbar-icon">
-        <svg id="icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg id="icon" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="3" y1="6" x2="21" y2="6"></line>
           <line x1="3" y1="12" x2="21" y2="12"></line>
           <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -24,43 +26,44 @@
 
       <ul id="nav-list" class="nav-list">
         <li><a href="index.html">Acceuil</a></li>
-        <li><a href="index2.html">Contact</a></li>
+        <li><a href="https://t.me/Surf_For_Free_services" target="_blank">Contact</a></li>
+
         <li class="dropdown-container">
           <span class="dropdown-trigger">Pays</span>
           <ul class="dropdown-menu">
-            <li onclick="coteIvoire()">Côte d'Ivoire</li>
+            <li class="country" onclick="coteIvoire()">Côte d'Ivoire <span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/v1735541684/images_1_dqqs6q.jpg" alt="drapeau"></span></li>
 
-            <li onclick="cameroun()">Cameroun</li>
+            <li class="country" onclick="cameroun()">Cameroun <span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/c_thumb,w_200,g_face/v1735542008/t%C3%A9l%C3%A9chargement_1_fuvnb3.png" alt="drapeau"></span></li>
 
-            <li onclick="senegal()">Sénégal</li>
-            <li onclick="burkina()">Burkina Faso</li>
+            <li class="country" onclick="senegal()">Sénégal <span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/v1736527445/fb1mrukx4fhxua3glg2z.png" alt="drapeau"></span></li>
 
-            <li onclick="mali()">Mali</li>
+            <li class="country" onclick="burkina()">Burkina Faso <span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/v1736527599/g3rs2pgzlwtp55cni66p.png" alt="drapeau"></span></li>
 
-            <li onclick="niger()">Niger</li>
+            <li class="country" onclick="mali()">Mali <span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/v1736527799/oaiwayg8e9mxzbagrulv.png" alt="drapeau"></span></li>
 
-            <li onclick="guinee()">Guinée</li>
+            <li class="country" onclick="niger()">Niger <span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/v1736527866/oxi685xpibl6h8ucrg3v.png" alt="drapeau"></span></li>
 
-            <li onclick="togo()">Togo</li>
+            <li class="country" onclick="guinee()">Guinée <span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/v1736534863/yepc1xusawma1903y60n.png" alt="drapeau"></span></li>
 
-            <li onclick="bénin()">Bénin</li>
+            <li class="country" onclick="togo()">Togo<span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/v1736534914/dwreqyu4xrfg2raanfsc.png" alt="drapeau"></span></li>
 
-            <li onclick="congoRd()">RD Congo</li>
+            <li class="country" onclick="bénin()">Bénin <span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/v1736534969/a26q4mvrqei3ipiiue7p.png" alt="drapeau"></span></li>
 
-            <li onclick="congoRépublique()">République du Congo</li>
+            <li class="country" onclick="congoRd()">RD Congo <span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/v1736535028/jirqixw72yjwssxttidu.png" alt="drapeau"></span></li>
 
-            <li onclick="algerie()">Algérie</li>
+            <li class="country" onclick="congoRépublique()">République du Congo <span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/v1736535374/kuikcgmk0ghfr2vydyo3.png" alt="drapeau"></span></li>
 
-            <li onclick="tunisie()">Tunisie</li>
+            <li class="country" onclick="algerie()">Algérie <span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/v1736535437/x7agzlgwlkmceuqktoxb.png" alt="drapeau"></span></li>
 
-            <li onclick="madagascar()">Madagascar</li>
+            <li class="country" onclick="tunisie()">Tunisie <span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/v1736535522/dtmpm3jgunkjrxwi4w9s.png" alt="drapeau"></span></li>
 
-            <li onclick="nigeria()">Nigeria</li>
+            <li class="country" onclick="madagascar()">Madagascar <span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/v1736535607/smu6dewal3gbarfcl7ob.png" alt="drapeau"></span></li>
 
-            <li onclick="sudAfric()">Afrique du Sud</li>
+            <li class="country" onclick="nigeria()">Nigeria <span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/v1736535769/images_s1lyql.jpg" alt="drapeau"></span></li>
+
+            <li class="country" onclick="sudAfric()">Afrique du Sud <span class="country-color"><img style="width: 25px;" src="https://res.cloudinary.com/dmphpkfej/image/upload/v1736535840/tjjss0ak6dz5ugp6vhjk.png" alt="drapeau"></span></li>
           </ul>
         </li>
-
       </ul>
     </nav>
   </header>
@@ -121,9 +124,10 @@
             <p>
               Vous avez des questions ou besoin d'aide ? Notre équipe est là pour vous. 
               Remplissez le formulaire ci-dessous ou envoyez-nous un email à 
-              <a href="mailto:support@votresitevpn.com" class="contact-link">support@votresitevpn.com</a>.
+              <a href="https://t.me/Surf_For_Free_services" target="_blank"class="contact-link">support@votresitevpn.com</a>.
             </p>
-            <form class="contact-form"  action="mailto:support@votresitevpn.com" method="post" enctype="text/plain">
+            
+            <form id="telegramForm" class="contact-form">
               <div class="form-group">
                 <label for="name">Nom :</label>
                 <input type="text" id="name" name="name" placeholder="Votre nom" required>
